@@ -40,5 +40,3 @@ def git_log():
     contributor_ref.set(contributor_data)
     return #result
 
-git_log()
-
