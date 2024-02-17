@@ -1,7 +1,7 @@
 import subprocess
 
 def git_log():
-    command = "git log"
+    command = "git log -1"
     cli_result = subprocess.run(command, shell=True, text=True, capture_output=True)
     result = ""
 
