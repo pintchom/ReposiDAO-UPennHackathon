@@ -1,6 +1,10 @@
 import subprocess
 import re
+import firebase_admin as fa 
+from google.cloud import firestore
 
+cred = fa.credentials.Certificate("reposadao-b831e-firebase-adminsdk-q252c-10034dc1e1.json")
+fa.initialize_app(cred)
 
 def git_log():
     command = "git log -1"
@@ -10,7 +14,6 @@ def git_log():
     if cli_result.returncode == 0:
         result = cli_result.stdout
         print(result)
-        print("Output saved to git_shortlog_output.txt")
     else:
         print("Error executing command:", cli_result.stderr)
 
@@ -21,10 +24,10 @@ def git_log():
     if match:
         commit_id = match.group(1)
         email = match.group(2)
-        print(f"Commit ID: {commit_id}")
-        print(f"Email: {email}")
-    else:
-        print("No match found")
+        #print(f"Commit ID: {commit_id}")
+        #print(f"Email: {email}")
+        db = firestore.Client()
+        contributor_ref = db.collection('contributors').document(email)
 
     return result
 
