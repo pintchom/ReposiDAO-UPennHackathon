@@ -11,3 +11,4 @@ def update_git_log():
     main.git_log()
     return jsonify({'message': "Git log updated"})
 #commit test
+#commit test
