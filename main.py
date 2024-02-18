@@ -2,11 +2,14 @@ import subprocess
 import re
 import firebase_admin as fa
 from firebase_admin import firestore as fs
+from minting import mint
 
 cred = fa.credentials.Certificate("reposadao-b831e-firebase-adminsdk-q252c-10034dc1e1.json")
 fa.initialize_app(cred)
 
 def git_log():
+    command = "git pull"
+    cli_result = subprocess.run(command, shell=True, text=True, capture_output=True)
     command = "git log -1"
     cli_result = subprocess.run(command, shell=True, text=True, capture_output=True)
     result = ""
@@ -32,9 +35,12 @@ def git_log():
         if commit_id != contributor_data['commit_ids'][-1]:
             contributor_data['commit_ids'].append(commit_id)
             contributor_data['contributions'] += 1
+            mint(contributor_data['public_key'])
+
     else:
         contributor_data['commit_ids'] = [commit_id]
         contributor_data['contributions'] = 1
+        mint(contributor_data['public_key'])
 
     contributor_ref.set(contributor_data)
     return #result
