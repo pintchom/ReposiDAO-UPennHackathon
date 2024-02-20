@@ -42,3 +42,5 @@ def verify_email():
         return jsonify({'message': "Email is good", "status": 1})
     else:
         return jsonify({'message': "Email not found, try again", "status": 0})
+
+#asodubfkhjsdbfblsdfg
