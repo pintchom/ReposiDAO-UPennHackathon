@@ -79,7 +79,7 @@ def add_wallet(email, public_key):
         return
     else:
         print("Email not found")
-        return "Email not found"
+        return 0
 
 def check_email(email):
     db = fs.client()
