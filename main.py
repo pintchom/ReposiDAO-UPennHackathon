@@ -81,20 +81,13 @@ def add_wallet(email, public_key):
         print("Email not found")
         return "Email not found"
 
+def check_email(email):
+    db = fs.client()
+    cont_no_login_ref = db.collection('cont_no_login').document(email)
+    cont_no_login_data = cont_no_login_ref.get().to_dict() or {}
+    cont_logged_in_ref = db.collection('cont_logged_in').document(email)
+    cont_logged_in_data = cont_logged_in_ref.get().to_dict() or {}
 
-'''
-contributor_ref = db.collection('contributors').document(email)
-contributor_data = contributor_ref.get().to_dict() or {}
-
-if contributor_data.get('commit_ids'):
-    if commit_id != contributor_data['commit_ids'][-1]:
-        contributor_data['commit_ids'].append(commit_id)
-        contributor_data['contributions'] += 1
-        mint(contributor_data['public_key'])
-
-else:
-    contributor_data['commit_ids'] = [commit_id]
-    contributor_data['contributions'] = 1
-    mint(contributor_data['public_key'])
-
-contributor_ref.set(contributor_data) '''
+    if cont_logged_in_data.get('commit_ids') or cont_no_login_data.get('commit_ids'):
+        return True
+    return False

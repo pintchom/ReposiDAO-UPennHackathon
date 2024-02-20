@@ -25,3 +25,12 @@ def connect_wallet_login():
     public_key = data.get('public_key')
     main.add_wallet(email, public_key)
     return jsonify({'message': "Wallet Updated"})
+
+@app.route('/verify_email', methods=['GET'])
+def verify_email():
+    data = request.get_json()
+    email = data.get('email')
+    if main.check_email(email):
+        return jsonify({'message': "Email is good"})
+    else:
+        return jsonify({'message': "Email not found, try again"})
