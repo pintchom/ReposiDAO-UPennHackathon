@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import EmailBox from "./Components/EmailBox";
 
 function App() {
   // state to keep track of successful git changes
@@ -42,6 +43,12 @@ function App() {
     }
   }
 
+  const [showEmailBox, setShowEmailBox] = useState(false);
+
+  const toggleEmailBox = () => {
+    setShowEmailBox(!showEmailBox);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -49,6 +56,8 @@ function App() {
         <h1>Successful Changes: {counter}</h1>
         <button onClick={requestAccount}>Connect MetaMask</button>
         <h3>Wallet Address: {walletAddress}</h3>
+        <button onClick={toggleEmailBox}>Enter Your Email</button>
+        {showEmailBox && <EmailBox />}
       </header>
     </div>
   );
