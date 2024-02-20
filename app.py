@@ -31,6 +31,6 @@ def verify_email():
     data = request.get_json()
     email = data.get('email')
     if main.check_email(email):
-        return jsonify({'message': "Email is good"})
+        return jsonify({'message': "Email is good", "status": 1})
     else:
-        return jsonify({'message': "Email not found, try again"})
+        return jsonify({'message': "Email not found, try again", "status": 0})
