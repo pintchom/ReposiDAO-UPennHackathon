@@ -24,13 +24,34 @@ function App() {
       });
   };
 
+  const [email, setEmail] = useState('');
+  const [walletData, setWalletData] = useState('');
+
+  const handleEmailSubmit = async (emailData) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", { email: emailData });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error submitting email:', error);
+    }
+  };
+
+  const handleWalletSubmit = async (walletData) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", { wallet: walletData });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error submitting wallet data:', error);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={refreshGitLog}>Refresh</button>
         <h1>Successful Changes: {counter}</h1>
-        < WalletConnector />
-        <EmailBox /> 
+        < WalletConnector onSubmit={handleEmailSubmit} />
+        < EmailBox onSubmit={handleWalletSubmit} /> 
       </header>
     </div>
   );
