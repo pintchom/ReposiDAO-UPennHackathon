@@ -17,3 +17,11 @@ def update_git_log():
 def get_balances():
     balance_list = balances()
     return jsonify(balance_list)
+
+@app.route('/connect_wallet_login', methods=['POST'])
+def connect_wallet_login():
+    data = request.get_json()
+    email = data.get('email')
+    public_key = data.get('public_key')
+    main.add_wallet(email, public_key)
+    return jsonify({'message': "Wallet Updated"})

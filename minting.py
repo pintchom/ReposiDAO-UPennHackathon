@@ -1,7 +1,7 @@
 from web3 import Web3
 import json
 
-def mint(recipient_public_key):
+def mint(recipient_public_key, mint_qty):
     infura_url = "https://sepolia.infura.io/v3/9a40be699fea4fcf9ba80ad8495a3eaf"
     web3 = Web3(Web3.HTTPProvider(infura_url))
 
@@ -18,7 +18,7 @@ def mint(recipient_public_key):
     private_key = "c384badf1fdd45baa289bf2b1245347df5d36681afa109885a91f966432566dc"
     recipient_public_key = web3.to_checksum_address(recipient_public_key)
     contract = web3.eth.contract(address=contract_address, abi=contract_abi)
-    mint_amount = web3.to_wei(100, 'ether')
+    mint_amount = web3.to_wei(mint_qty, 'ether')
 
     nonce = web3.eth.get_transaction_count(public_key)
     transaction = contract.functions.mint(recipient_public_key, mint_amount).build_transaction({
