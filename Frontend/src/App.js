@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import EmailBox from "./Components/EmailBox";
+import WalletConnector from "./Components/WalletConnector";
 
 function App() {
   // state to keep track of successful git changes
@@ -23,26 +24,6 @@ function App() {
       });
   };
 
-  const [walletAddress, setWalletAddress] = useState("");
-
-  async function requestAccount() {
-    console.log("Requesting Account...");
-  
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        setWalletAddress(accounts[0]);
-        console.log("Detected MetaMask Wallet.");
-      } catch (error) {
-        console.log("Failed to connect or user denied access to MetaMask.");
-      }
-    } else {
-      console.log("No MetaMask Extension Found");
-    }
-  }
-
   const [showEmailBox, setShowEmailBox] = useState(false);
 
   const toggleEmailBox = () => {
@@ -54,8 +35,7 @@ function App() {
       <header className="App-header">
         <button onClick={refreshGitLog}>Refresh</button>
         <h1>Successful Changes: {counter}</h1>
-        <button onClick={requestAccount}>Connect MetaMask</button>
-        <h3>Wallet Address: {walletAddress}</h3>
+        < WalletConnector />
         <button onClick={toggleEmailBox}>Enter Your Email</button>
         {showEmailBox && <EmailBox />}
       </header>
