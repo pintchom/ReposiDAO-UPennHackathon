@@ -24,20 +24,13 @@ function App() {
       });
   };
 
-  const [showEmailBox, setShowEmailBox] = useState(false);
-
-  const toggleEmailBox = () => {
-    setShowEmailBox(!showEmailBox);
-  };
-
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={refreshGitLog}>Refresh</button>
         <h1>Successful Changes: {counter}</h1>
         < WalletConnector />
-        <button onClick={toggleEmailBox}>Enter Your Email</button>
-        {showEmailBox && <EmailBox />}
+        <EmailBox /> 
       </header>
     </div>
   );
