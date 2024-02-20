@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 import main
+from balances import balances
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,4 +12,8 @@ def hello_world():
 def update_git_log():
     main.git_log()
     return jsonify({'message': "Git log updated"})
-#commit test
+
+@app.route('/get_balances', methods=['GET'])
+def get_balances():
+    balance_list = balances()
+    return jsonify(balance_list)

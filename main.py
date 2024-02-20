@@ -16,7 +16,6 @@ def git_log():
 
     if cli_result.returncode == 0:
         result = cli_result.stdout
-        print(result)
     else:
         print("Error executing command:", cli_result.stderr)
 
