@@ -24,50 +24,30 @@ def git_log():
     print(email)
     db = fs.client()
 
-    '''
-    contributor_ref = db.collection('contributors').document(email)
-    contributor_data = contributor_ref.get().to_dict() or {}
+    cont_no_login_ref = db.collection('cont_no_login').document(email)
+    cont_no_login_data = cont_no_login_ref.get().to_dict() or {}
+    cont_logged_in_ref = db.collection('cont_logged_in').document(email)
+    cont_logged_in_data = cont_logged_in_ref.get().to_dict() or {}
 
-    if contributor_data.get('commit_ids'):
-        if commit_id != contributor_data['commit_ids'][-1]:
-            contributor_data['commit_ids'].append(commit_id)
-            contributor_data['contributions'] += 1
-            mint(contributor_data['public_key'])
-
-    else:
-        contributor_data['commit_ids'] = [commit_id]
-        contributor_data['contributions'] = 1
-        mint(contributor_data['public_key'])
-
-    contributor_ref.set(contributor_data) '''
-
-    if email in db.collection('cont_logged_in').get():
-        cont_logged_in_ref = db.collection('cont_logged_in').collection(email)
-        cont_logged_in_data = cont_logged_in_ref.get().to_dict() or {}
+    if cont_logged_in_data.get('commit_ids'):
         if commit_id != cont_logged_in_data['commit_ids'][-1]:
-            cont_logged_in_data['commit_ids'].append(cont_logged_in_data)
+            cont_logged_in_data['commit_ids'].append(commit_id)
             cont_logged_in_data['contributions'] += 1
             mint(cont_logged_in_data['public_key'], 100)
             cont_logged_in_ref.set(cont_logged_in_data)
-            return
-    elif email in db.collection('cont_no_login').get():
-        cont_no_login_ref = db.collection('cont_no_login').collection(email)
-        cont_no_login_data = cont_no_login_ref.get().to_dict() or {}
+        return
+
+    elif cont_no_login_data.get('commit_ids'):
         if commit_id != cont_no_login_data['commit_ids'][-1]:
-            cont_no_login_data['commit_ids'].append(cont_no_login_data)
+            cont_no_login_data['commit_ids'].append(commit_id)
             cont_no_login_data['contributions'] += 1
             cont_no_login_ref.set(cont_no_login_data)
-            return
+        return
     else:
-        cont_no_login_ref = db.collection('cont_no_login').document(email)
-        cont_no_login_data = cont_no_login_ref.get().to_dict() or {}
         cont_no_login_data['commit_ids'] = [commit_id]
         cont_no_login_data['contributions'] = 1
         cont_no_login_ref.set(cont_no_login_data)
         return
-
-    return
-
 
 def extract_email_and_commit_id(log_text):
     commit_id_pattern = r'\bcommit (\w+)'
@@ -93,7 +73,28 @@ def add_wallet(email, public_key):
         cont_logged_in_data['commit_ids'] = cont_no_login_data['commit_ids']
         cont_logged_in_data['contributions'] = cont_no_login_data['contributions']
         cont_logged_in_data['public_key'] = public_key
-        cont_logged_in_data['email'] = public_key
+        cont_logged_in_data['email'] = email
         mint(public_key, cont_logged_in_data['contributions']*100)
         cont_logged_in_ref.set(cont_logged_in_data)
         return
+    else:
+        print("Email not found")
+        return "Email not found"
+
+
+'''
+contributor_ref = db.collection('contributors').document(email)
+contributor_data = contributor_ref.get().to_dict() or {}
+
+if contributor_data.get('commit_ids'):
+    if commit_id != contributor_data['commit_ids'][-1]:
+        contributor_data['commit_ids'].append(commit_id)
+        contributor_data['contributions'] += 1
+        mint(contributor_data['public_key'])
+
+else:
+    contributor_data['commit_ids'] = [commit_id]
+    contributor_data['contributions'] = 1
+    mint(contributor_data['public_key'])
+
+contributor_ref.set(contributor_data) '''
