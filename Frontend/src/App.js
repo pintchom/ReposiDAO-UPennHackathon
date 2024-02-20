@@ -22,11 +22,33 @@ function App() {
       });
   };
 
+  const [walletAddress, setWalletAddress] = useState("");
+
+  async function requestAccount() {
+    console.log("Requesting Account...");
+  
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      try {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        setWalletAddress(accounts[0]);
+        console.log("Detected MetaMask Wallet.");
+      } catch (error) {
+        console.log("Failed to connect or user denied access to MetaMask.");
+      }
+    } else {
+      console.log("No MetaMask Extension Found");
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={refreshGitLog}>Refresh</button>
         <h1>Successful Changes: {counter}</h1>
+        <button onClick={requestAccount}>Connect MetaMask</button>
+        <h3>Wallet Address: {walletAddress}</h3>
       </header>
     </div>
   );
