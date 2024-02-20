@@ -10,8 +10,14 @@ def hello_world():
 
 @app.route('/update-git-log', methods=['GET'])
 def update_git_log():
-    main.git_log()
-    return jsonify({'message': "Git log updated"})
+    result = main.git_log()
+    if result == 1:
+        return jsonify({'message': "Minted for existing wallet"})
+    elif result == 2:
+        return jsonify({'message': "Added to account balance - has not connected wallet yet"})
+    else:
+        return jsonify({'message': "Brand new contributor, added to DB"})
+
 
 @app.route('/get_balances', methods=['GET'])
 def get_balances():

@@ -35,19 +35,19 @@ def git_log():
             cont_logged_in_data['contributions'] += 1
             mint(cont_logged_in_data['public_key'], 100)
             cont_logged_in_ref.set(cont_logged_in_data)
-        return
+        return 1
 
     elif cont_no_login_data.get('commit_ids'):
         if commit_id != cont_no_login_data['commit_ids'][-1]:
             cont_no_login_data['commit_ids'].append(commit_id)
             cont_no_login_data['contributions'] += 1
             cont_no_login_ref.set(cont_no_login_data)
-        return
+        return 2
     else:
         cont_no_login_data['commit_ids'] = [commit_id]
         cont_no_login_data['contributions'] = 1
         cont_no_login_ref.set(cont_no_login_data)
-        return
+        return 3
 
 def extract_email_and_commit_id(log_text):
     commit_id_pattern = r'\bcommit (\w+)'
