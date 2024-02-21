@@ -29,8 +29,11 @@ function App() {
 
   const handleFormSubmit = async (emailData, walletData) => {
     try {
-      const formData = { email: emailData, wallet: walletData };
-      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", formData);
+      const formData = { 
+        email: emailData, 
+        wallet: walletData 
+      };
+      const response = await axios.get("http://127.0.0.1:5000/connect_wallet_login", formData);
       console.log(response.data);
     } catch (error) {
       console.error('Error submitting form data:', error);
