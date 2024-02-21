@@ -97,3 +97,27 @@ def check_email(email):
     if cont_logged_in_data.get('commit_ids') or cont_no_login_data.get('commit_ids'):
         return True
     return False
+
+def add_to_history(email, commit_id, date):
+    db = fs.client()
+    cont_logged_in_ref = db.collection('cont_logged_in').document(email)
+    cont_logged_in_data = cont_logged_in_ref.get().to_dict() or {}
+    public_key = None
+    if cont_logged_in_data.get('public_key'):
+        public_key = cont_logged_in_data['public_key']
+
+    if public_key:
+        history_ref = db.collection('history').document(date)
+        history_data = history_ref.get().to_dict() or {}
+        history_data['email'] = email
+        history_data['public_key'] = public_key
+        history_data['commit_id'] = commit_id
+        history_data['mint_amount'] = 100
+        history_ref.set(history_data)
+    else:
+        history_ref = db.collection('history').document(date)
+        history_data = history_ref.get().to_dict() or {}
+        history_data['email'] = email
+        history_data['commit_id'] = commit_id
+        history_data['mint_amount'] = 0
+        history_ref.set(history_data)
