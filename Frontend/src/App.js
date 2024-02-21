@@ -27,22 +27,24 @@ function App() {
   const [email, setEmail] = useState('');
   const [walletData, setWalletData] = useState('');
 
-  const handleEmailSubmit = async (emailData) => {
+  const handleFormSubmit = async (emailData, walletData) => {
     try {
-      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", { email: emailData });
+      const formData = { email: emailData, wallet: walletData };
+      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", formData);
       console.log(response.data);
     } catch (error) {
-      console.error('Error submitting email:', error);
+      console.error('Error submitting form data:', error);
     }
   };
-
-  const handleWalletSubmit = async (walletData) => {
-    try {
-      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", { wallet: walletData });
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error submitting wallet data:', error);
-    }
+  
+  const handleEmailSubmit = (emailData) => {
+    setEmail(emailData);
+    handleFormSubmit(emailData, walletData);
+  };
+  
+  const handleWalletSubmit = (walletData) => {
+    setWalletData(walletData);
+    handleFormSubmit(email, walletData);
   };
 
   return (
@@ -50,8 +52,8 @@ function App() {
       <header className="App-header">
         <button onClick={refreshGitLog}>Refresh</button>
         <h1>Successful Changes: {counter}</h1>
-        < WalletConnector onSubmit={handleEmailSubmit} />
-        < EmailBox onSubmit={handleWalletSubmit} /> 
+        < WalletConnector onSubmit={handleWalletSubmit}/>
+        < EmailBox onSubmit={handleEmailSubmit} /> 
       </header>
     </div>
   );
