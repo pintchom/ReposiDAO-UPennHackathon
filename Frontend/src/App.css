@@ -1,38 +1,80 @@
+/* General App Styles */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    text-align: center;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: "Arial", sans-serif;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #2b2d42; /* Dark blue background */
+    color: #edf2f4; /* Light grey text */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+/* Buttons */
+.refresh-button,
+.submit-button {
+    margin: 20px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: #8d99ae; /* Grey */
+    color: #edf2f4; /* White */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.refresh-button:hover,
+.submit-button:hover {
+    background-color: #ef233c; /* Bright Red */
+}
+
+/* Form Container & Responses */
+.form-container,
+.api-response {
+    background-color: #8d99ae; /* Light Grey */
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.response {
+    margin-top: 15px;
+    color: #2b2d42; /* Dark Blue */
+}
+
+.api-response {
+    color: #2b2d42; /* Dark Blue */
+    border-color: #d90429; /* Red */
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 20px;
+}
+
+/* Input and Form Styles */
+input[type="email"],
+input[type="text"] {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #8d99ae; /* Grey */
+    width: calc(
+        100% - 22px
+    ); /* Input full width considering padding and border */
+}
+
+input[type="email"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: #ef233c; /* Bright Red */
+    box-shadow: 0 0 0 2px rgba(239, 35, 60, 0.2);
+}
+
+h3 {
+    color: #d90429; /* Red */
 }

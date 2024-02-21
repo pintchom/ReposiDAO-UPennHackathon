@@ -31,6 +31,7 @@ def connect_wallet_login():
     data = request.get_json()
     email = data.get('email')
     public_key = data.get('public_key')
+    print(email, public_key)
     main.add_wallet(email, public_key)
     if main == 0:
         print("FOUND A BAD EMAIL")

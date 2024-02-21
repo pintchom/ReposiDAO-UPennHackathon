@@ -1,4 +1,3 @@
-# MAX IS FARTING IN MY FACE  😠 
 from web3 import Web3
 import json
 

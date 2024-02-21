@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const EmailBox = () => {
-  const [email, setEmail] = useState('');
+// Accept a prop named `onSubmit` which is a function passed from the parent component
+const EmailBox = ({ onSubmit }) => {
+  const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -9,10 +10,10 @@ const EmailBox = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can handle the submission of the email, such as sending it to a server or processing it further
-    console.log('Email submitted:', email);
-    // Clear the input field after submission
-    setEmail('');
+    // Call the onSubmit prop function, passing the email value to the parent component
+    onSubmit(email); // This line is changed to use the onSubmit prop
+    console.log("Email submitted:", email);
+    setEmail(""); // Optionally reset the email state here if needed
   };
 
   return (
@@ -26,7 +27,7 @@ const EmailBox = () => {
           placeholder="Your email address"
           required
         />
-        <button type="submit" >Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
