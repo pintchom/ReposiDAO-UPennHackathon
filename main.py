@@ -133,7 +133,7 @@ def get_history():
     db = fs.client()
     history_ref = db.collection('history')
     history_data = history_ref.get()
-    history = []
+    history = {}
     for date in history_data:
-        history.append(date.to_dict())
+        history[date.id] = date.to_dict()
     return history

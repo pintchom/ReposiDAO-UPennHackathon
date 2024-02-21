@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ethers } from "ethers";
 
 // Accept a prop named `onSubmit` which is a function passed from the parent component
 const WalletConnector = ({ onSubmit }) => {

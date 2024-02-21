@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import EmailBox from "./Components/EmailBox";
 import WalletConnector from "./Components/WalletConnector";
+import { exchangeTokensForGoods } from "./utils/blockchainstuff";
+import { ethers } from "ethers";
 
 function App() {
   const [counter, setCounter] = useState(0);
@@ -51,6 +53,12 @@ function App() {
     setWalletData(walletData);
   };
 
+  const buyGoods = () => {
+    const tokenAmount = ethers.utils.parseUnits("100", 18);
+    const parentWalletXYZ = "0x76a89dBd709835b9D1A3D60eE31f9e6C54CC8ac6"; // Example address
+    exchangeTokensForGoods(tokenAmount, parentWalletXYZ);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -73,6 +81,8 @@ function App() {
               <p>{apiResponse}</p>
             </div>
           )}
+          {/* Add the Buy 100 REPO Goods button here */}
+          <button onClick={buyGoods}>Buy 100 REPO Goods</button>
         </div>
       </header>
     </div>

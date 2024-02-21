@@ -31,8 +31,6 @@ def get_balances():
         balances[to_address] = balances.get(to_address, 0) + amount
 
     balances = {address: balance for address, balance in balances.items() if balance != 0}
-    for address, balance in balances.items():
-        print(f"Address: {address}, Balance: {balance}")
 
     return balances
 
