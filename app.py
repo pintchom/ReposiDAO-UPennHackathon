@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 import main
 from balances import balances
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def hello_world():
