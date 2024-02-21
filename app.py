@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import main
-from balances import balances
+import balances
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -23,8 +23,15 @@ def update_git_log():
 
 @app.route('/get_balances', methods=['GET'])
 def get_balances():
-    balance_list = balances()
+    balance_list = balances.get_balances()
     return jsonify(balance_list)
+
+@app.route('/get_wallet_balance', methods=['GET'])
+def get_wallet_ballance():
+    data = request.get_json()
+    public_key = data.get('public_key')
+    balance = balances.get_single_balance(public_key)
+    return jsonify({"public_key": public_key, "balance": balance})
 
 @app.route('/connect_wallet_login', methods=['POST'])
 def connect_wallet_login():

@@ -29,15 +29,11 @@ function App() {
         email: email,
         public_key: walletData, // Adjusted to match the API's expected format
       };
-<<<<<<< Updated upstream
-      const response = await axios.post("http://127.0.0.1:5000/connect_wallet_login", formData);
-=======
       console.log(JSON.stringify(formData));
       const response = await axios.post(
         "http://127.0.0.1:5000/connect_wallet_login",
         formData,
       );
->>>>>>> Stashed changes
       console.log(response.data);
       setApiResponse(JSON.stringify(response.data));
     } catch (error) {
