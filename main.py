@@ -65,6 +65,12 @@ def add_wallet(email, public_key):
     db = fs.client()
     cont_no_login_ref = db.collection('cont_no_login').document(email)
     cont_no_login_data = cont_no_login_ref.get().to_dict() or {}
+    cont_logged_in_ref = db.collection('cont_logged_in').document(email)
+    cont_logged_in_data = cont_logged_in_ref.get().to_dict() or {}
+
+    if cont_logged_in_data.get('commit_ids'):
+        print("this wallet is already connected")
+        return
 
     if cont_no_login_data.get('commit_ids'):
         cont_logged_in_ref = db.collection('cont_logged_in').document(email)
