@@ -55,4 +55,7 @@ def verify_email():
     else:
         return jsonify({'message': "Email not found, try again", "status": 0})
 
-#asodubfkhjsdbfblsdfg
+@app.route('/get_history', methods=['GET'])
+def get_history():
+    history = main.get_history()
+    return jsonify(history)

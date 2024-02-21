@@ -19,9 +19,12 @@ def git_log():
     else:
         print("Error executing command:", cli_result.stderr)
 
-    commit_id, email = extract_email_and_commit_id(result)
+    commit_id, email, date = extract_email_and_commit_id(result)
     print(commit_id)
     print(email)
+    print(date)
+    add_to_history(email, commit_id, date)
+
     db = fs.client()
 
     cont_no_login_ref = db.collection('cont_no_login').document(email)
@@ -52,6 +55,7 @@ def git_log():
 def extract_email_and_commit_id(log_text):
     commit_id_pattern = r'\bcommit (\w+)'
     email_pattern = r'<(.+?)>'
+    date_pattern = r'Date:\s+(.+)'
 
     commit_id_match = re.search(commit_id_pattern, log_text)
     commit_id = commit_id_match.group(1) if commit_id_match else None
@@ -59,7 +63,10 @@ def extract_email_and_commit_id(log_text):
     email_match = re.search(email_pattern, log_text)
     email = email_match.group(1) if email_match else None
 
-    return commit_id, email
+    date_match = re.search(date_pattern, log_text)
+    date = date_match.group(1) if date_match else None
+
+    return commit_id, email, date
 
 def add_wallet(email, public_key):
     db = fs.client()
@@ -121,3 +128,12 @@ def add_to_history(email, commit_id, date):
         history_data['commit_id'] = commit_id
         history_data['mint_amount'] = 0
         history_ref.set(history_data)
+
+def get_history():
+    db = fs.client()
+    history_ref = db.collection('history')
+    history_data = history_ref.get()
+    history = []
+    for date in history_data:
+        history.append(date.to_dict())
+    return history
