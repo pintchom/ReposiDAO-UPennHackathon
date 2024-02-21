@@ -61,14 +61,14 @@ def get_history():
     history = main.get_history()
     return jsonify(history)
 
-@app.route('/sign_purchase', methods=['POST'])
-def sign_purchase():
-    data = request.get_json()
-    sender_address = data['public_key']
-    signature = data['sender_signature']
-    message = data['message']
-    send_qty = data['send_qty']
+# @app.route('/sign_purchase', methods=['POST'])
+# def sign_purchase():
+#     data = request.get_json()
+#     sender_address = data['public_key']
+#     signature = data['sender_signature']
+#     message = data['message']
+#     send_qty = data['send_qty']
 
-    minting.purchase(sender_address, signature, message, send_qty)
+#     minting.purchase(sender_address, signature, message, send_qty)
 
-    return jsonify({"message": "success"})
+#     return jsonify({"message": "success"})
