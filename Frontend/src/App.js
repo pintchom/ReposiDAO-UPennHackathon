@@ -90,15 +90,42 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <WalletConnector
-          onSubmit={handleWalletSubmit}
+      <header
+        className="App-header"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center", // Ensure vertical alignment is centered for items
+          width: "100%",
+          padding: "1rem",
+        }}
+      >
+        <div>
+          <button
+            className="refresh-button"
+            onClick={refreshGitLog}
+            style={{
+              padding: "0.5rem 1rem",
+              cursor: "pointer",
+            }}
+          >
+            Refresh
+          </button>
+        </div>
+        <div
           style={{
-            marginRight: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
           }}
-        />
-
-        <EmailBox onSubmit={handleEmailSubmit} />
+        >
+          <WalletConnector onSubmit={handleWalletSubmit} />
+          <EmailBox
+            onSubmit={handleEmailSubmit}
+            style={{ marginTop: "1rem" }}
+          />
+        </div>
       </header>
       <main
         style={{
@@ -143,17 +170,7 @@ function App() {
             alignItems: "flex-end",
           }}
         >
-          <button
-            className="refresh-button"
-            onClick={refreshGitLog}
-            style={{
-              padding: "0.5rem 1rem",
-              cursor: "pointer",
-              marginBottom: "1rem",
-            }}
-          >
-            Refresh
-          </button>
+          {/* This aside was left empty as per the original layout. Adjust if needed for additional content. */}
         </aside>
       </main>
     </div>
