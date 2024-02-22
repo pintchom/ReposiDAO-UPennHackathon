@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Vote from "./Voting.js"; // Ensure this is the correct path
 
-const GetProposals = () => {
+const GetProposals = ({ userAddress }) => {
   const [proposals, setProposals] = useState([]);
 
   useEffect(() => {
-    // Function to fetch proposals
     const fetchProposals = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           "http://127.0.0.1:5000/fetch_all_proposals",
         );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        if (response.status === 200) {
+          setProposals(response.data);
+        } else {
+          console.error("Failed to fetch proposals:", response.status);
         }
-        const data = await response.json();
-        setProposals(data);
       } catch (error) {
-        console.error("Could not fetch proposals:", error);
+        console.error("Error fetching proposals:", error);
       }
     };
 
     fetchProposals();
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <div>
-      <h2>Proposals</h2>
-      <ul>
-        {proposals.map((proposal) => (
-          <li key={proposal.id}>
-            <p>
-              <strong>Description:</strong> {proposal.description}
-            </p>
-            <p>
-              <strong>Votes For:</strong> {proposal.votesFor}
-            </p>
-            <p>
-              <strong>Votes Against:</strong> {proposal.votesAgainst}
-            </p>
-            <p>
-              <strong>Executed:</strong> {proposal.executed ? "Yes" : "No"}
-            </p>
-          </li>
-        ))}
-      </ul>
+      {proposals.map((proposal) => (
+        <div key={proposal.id} style={{ marginBottom: "20px" }}>
+          <p>
+            <strong>Description:</strong> {proposal.description}
+          </p>
+          <p>
+            <strong>Votes For:</strong> {proposal.votesFor / 10 ** 20} |{" "}
+            <strong>Votes Against:</strong> {proposal.votesAgainst / 10 ** 20}
+          </p>
+          <Vote proposalId={proposal.id} userAddress={userAddress} />
+        </div>
+      ))}
     </div>
   );
 };
