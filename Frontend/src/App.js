@@ -96,7 +96,7 @@ function App() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          alignItems: "center", // Ensure vertical alignment is centered for items
+          alignItems: "center",
           width: "100%",
           padding: "1rem",
         }}
@@ -121,10 +121,9 @@ function App() {
           }}
         >
           <WalletConnector onSubmit={handleWalletSubmit} />
-          <EmailBox
-            onSubmit={handleEmailSubmit}
-            style={{ marginTop: "1rem" }}
-          />
+          <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
+            <EmailBox onSubmit={handleEmailSubmit} />
+          </div>
         </div>
       </header>
       <main
@@ -139,7 +138,13 @@ function App() {
       >
         <aside
           className="leaderboard-feed"
-          style={{ flex: 1, marginRight: "1rem" }}
+          style={{
+            flex: 1,
+            marginRight: "1rem",
+            border: "2px solid black",
+            borderRadius: "10px",
+            padding: "20px", // Increased padding here
+          }}
         >
           <Leaderboard />
         </aside>
@@ -157,8 +162,15 @@ function App() {
           <div className="tokenomic-info">
             <TokenomicInfo />
           </div>
-
-          <div className="commit-history-feed" style={{ marginTop: "1rem" }}>
+          <div
+            className="commit-history-feed"
+            style={{
+              marginTop: "1rem",
+              border: "2px solid black",
+              borderRadius: "10px",
+              padding: "20px", // Increased padding here
+            }}
+          >
             <OutgoingTokens />
           </div>
         </section>
