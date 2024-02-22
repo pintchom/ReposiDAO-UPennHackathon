@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import EmailBox from "./Components/EmailBox";
-import WalletConnector from "./Components/WalletConnector";
+import WalletConnector from "./Components/Wallet Connector/WalletConnector";
 import { exchangeTokensForGoods } from "./utils/blockchainstuff";
 import { fetchCommitHistory } from "./utils/balances_stuff";
 import { ethers } from "ethers";
+
 
 function App() {
   const [counter, setCounter] = useState(0);

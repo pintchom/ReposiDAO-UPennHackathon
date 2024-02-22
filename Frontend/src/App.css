@@ -16,7 +16,10 @@
 }
 
 /* Buttons */
-.refresh-button,
+.refresh-button {
+
+}
+
 .submit-button {
     margin: 20px;
     padding: 10px 25px;
