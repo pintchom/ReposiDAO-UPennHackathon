@@ -3,9 +3,8 @@ import axios from "axios";
 import EmailBox from "./Components/EmailBox";
 import WalletConnector from "./Components/Wallet Connector/WalletConnector";
 import { exchangeTokensForGoods } from "./utils/blockchainstuff";
-import { fetchCommitHistory } from "./utils/balances_stuff";
+import { fetchBalances, fetchCommitHistory } from "./utils/balances_stuff";
 import { ethers } from "ethers";
-
 
 function App() {
   const [counter, setCounter] = useState(0);
@@ -13,6 +12,7 @@ function App() {
   const [walletData, setWalletData] = useState("");
   const [apiResponse, setApiResponse] = useState("");
   const [commitHistory, setCommitHistory] = useState([]);
+  const [balances, setBalances] = useState([]);
 
   const refreshGitLog = () => {
     axios
@@ -62,10 +62,21 @@ function App() {
     exchangeTokensForGoods(tokenAmount, parentWalletXYZ);
   };
 
+  // FUNC FOR GATHERING COMMIT HISTORY (ACTIVITY SECTION OR WTVR WE CALL IT)
   const loadCommitHistory = async () => {
     try {
       const historyData = await fetchCommitHistory(); // Assuming this function correctly fetches and returns data
       setCommitHistory(historyData);
+    } catch (error) {
+      console.error("Failed to fetch commit history:", error);
+    }
+  };
+
+  // FUNC TO GET BALANCES OF ACTIVE WALLETS
+  const loadBalances = async () => {
+    try {
+      const balancesData = await fetchBalances();
+      setBalances(balancesData);
     } catch (error) {
       console.error("Failed to fetch commit history:", error);
     }
@@ -93,8 +104,7 @@ function App() {
               <p>{apiResponse}</p>
             </div>
           )}
-          {/* Add the Buy 100 REPO Goods button here */}
-          <button onClick={buyGoods}>Buy 100 REPO Goods</button>
+          //<button onClick={buyGoods}>Buy 100 REPO Goods</button>
         </div>
       </header>
     </div>
