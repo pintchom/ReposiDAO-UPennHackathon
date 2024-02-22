@@ -3,6 +3,7 @@ import axios from "axios";
 import EmailBox from "./Components/EmailBox";
 import WalletConnector from "./Components/WalletConnector";
 import { exchangeTokensForGoods } from "./utils/blockchainstuff";
+import { fetchCommitHistory } from "./utils/balances_stuff";
 import { ethers } from "ethers";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [walletData, setWalletData] = useState("");
   const [apiResponse, setApiResponse] = useState("");
+  const [commitHistory, setCommitHistory] = useState([]);
 
   const refreshGitLog = () => {
     axios
@@ -55,8 +57,17 @@ function App() {
 
   const buyGoods = () => {
     const tokenAmount = ethers.utils.parseUnits("100", 18);
-    const parentWalletXYZ = "0x76a89dBd709835b9D1A3D60eE31f9e6C54CC8ac6"; // Example address
+    const parentWalletXYZ = "0x76a89dBd709835b9D1A3D60eE31f9e6C54CC8ac6";
     exchangeTokensForGoods(tokenAmount, parentWalletXYZ);
+  };
+
+  const loadCommitHistory = async () => {
+    try {
+      const historyData = await fetchCommitHistory(); // Assuming this function correctly fetches and returns data
+      setCommitHistory(historyData);
+    } catch (error) {
+      console.error("Failed to fetch commit history:", error);
+    }
   };
 
   return (
