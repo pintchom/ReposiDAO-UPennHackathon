@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ethers } from "ethers";
+
+//Components:
 import EmailBox from "./Components/EmailBox";
 import WalletConnector from "./Components/Wallet Connector/WalletConnector";
+import TokenomicInfo from "./Components/Tokenomic Info/TokenomicInfo";
+import Leaderboard from "./Components/Leaderboard/Leaderboard";
+import OutgoingTokens from "./Components/Outgoing Tokens/OutgoingTokens"; // Adjust the import path as necessary
+
+//Functions:
 import { exchangeTokensForGoods } from "./utils/blockchainstuff";
-import { fetchBalances, fetchCommitHistory } from "./utils/balances_stuff";
-import { ethers } from "ethers";
+// import { fetchBalances, fetchCommitHistory } from "./utils/balances_stuff";
 
 function App() {
   const [counter, setCounter] = useState(0);
   const [email, setEmail] = useState("");
   const [walletData, setWalletData] = useState("");
   const [apiResponse, setApiResponse] = useState("");
-  const [commitHistory, setCommitHistory] = useState([]);
-  const [balances, setBalances] = useState([]);
+  // const [commitHistory, setCommitHistory] = useState([]);
+  // const [balances, setBalances] = useState([]);
 
   const refreshGitLog = () => {
     axios
@@ -62,51 +69,101 @@ function App() {
     exchangeTokensForGoods(tokenAmount, parentWalletXYZ);
   };
 
-  // FUNC FOR GATHERING COMMIT HISTORY (ACTIVITY SECTION OR WTVR WE CALL IT)
-  const loadCommitHistory = async () => {
-    try {
-      const historyData = await fetchCommitHistory(); // Assuming this function correctly fetches and returns data
-      setCommitHistory(historyData);
-    } catch (error) {
-      console.error("Failed to fetch commit history:", error);
-    }
-  };
+  // const loadBalances = async () => {
+  //   const data = await fetchBalances();
+  //   if (data) {
+  //     setBalances(data); // Update the state with the fetched data
+  //   }
+  // };
 
-  // FUNC TO GET BALANCES OF ACTIVE WALLETS
-  const loadBalances = async () => {
-    try {
-      const balancesData = await fetchBalances();
-      setBalances(balancesData);
-    } catch (error) {
-      console.error("Failed to fetch commit history:", error);
-    }
-  };
+  // const loadCommitHistory = async () => {
+  //   const data = await fetchCommitHistory();
+  //   if (data) {
+  //     setCommitHistory(data); // Update the state with the fetched data
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   loadBalances();
+  //   loadCommitHistory();
+  // }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="content">
-          <button className="refresh-button" onClick={refreshGitLog}>
-            Refresh Git Log
-          </button>
-          <div className="form-container">
-            <EmailBox onSubmit={handleEmailSubmit} />
-            {email && <p className="response">Email: {email}</p>}
-            <WalletConnector onSubmit={handleWalletSubmit} />
-            {walletData && <p className="response">Wallet PK: {walletData}</p>}
-            <button className="submit-button" onClick={handleFormSubmit}>
-              SUBMIT FORM
-            </button>
-          </div>
-          {apiResponse && (
-            <div className="api-response">
-              <h3>API Response</h3>
-              <p>{apiResponse}</p>
-            </div>
-          )}
-          //<button onClick={buyGoods}>Buy 100 REPO Goods</button>
-        </div>
+      <header
+        className="App-header"
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          padding: "1rem",
+        }}
+      >
+        <WalletConnector
+          onSubmit={handleWalletSubmit}
+          style={{
+            marginRight: "1rem",
+          }}
+        />
+
+        <EmailBox onSubmit={handleEmailSubmit} />
       </header>
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          height: "100vh",
+          padding: "1rem",
+        }}
+      >
+        <aside
+          className="leaderboard-feed"
+          style={{ flex: 1, marginRight: "1rem" }}
+        >
+          <Leaderboard />
+        </aside>
+        <section
+          className="main-content"
+          style={{
+            flex: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            margin: "0 1rem",
+          }}
+        >
+          <h1>ReposiDAO</h1>
+          <div className="tokenomic-info">
+            <TokenomicInfo />
+          </div>
+
+          <div className="commit-history-feed" style={{ marginTop: "1rem" }}>
+            <OutgoingTokens />
+          </div>
+        </section>
+        <aside
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <button
+            className="refresh-button"
+            onClick={refreshGitLog}
+            style={{
+              padding: "0.5rem 1rem",
+              cursor: "pointer",
+              marginBottom: "1rem",
+            }}
+          >
+            Refresh
+          </button>
+        </aside>
+      </main>
     </div>
   );
 }
