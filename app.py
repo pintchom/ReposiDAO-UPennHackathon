@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify
 import main
 import balances
 import minting
-from tokenomics import get_supply
+import voting
+from tokenomics import get_supply, get_holders
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -78,3 +79,20 @@ def get_history():
 def fetch_supply():
     supply = get_supply()
     return jsonify(supply)
+
+@app.route('/fetch_holders', methods = ['GET'])
+def fetch_holders():
+    holders = get_holders()
+    return jsonify(holders)
+
+# @app.route('/send_signed_proposal', methods=['POST'])
+# def send_signed_proposal():
+#     data = request.get_json()
+#     signiature = data.get('signiature')
+#     response = voting.send_signed_transaction(signiature)
+#     return jsonify(response)
+
+@app.route('/fetch_all_proposals', methods=['GET'])
+def fetch_all_proposals():
+    proposals = voting.get_all_proposals()
+    return jsonify(proposals)

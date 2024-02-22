@@ -32,8 +32,9 @@ contract ReposiDAO is ERC20, ERC20Burnable, Ownable, ERC20Permit, ERC20Votes {
         proposalCount = 0;
     }
 
-    // Function to create a new proposal
-    function propose(string memory description) public onlyOwner returns (uint256) {
+    event ProposalCreated(uint256 id, string description);
+
+    function propose(string memory description) public returns (uint256) {
         uint256 newProposalId = proposalCount++;
         proposals[newProposalId] = Proposal({
             description: description,
@@ -42,6 +43,7 @@ contract ReposiDAO is ERC20, ERC20Burnable, Ownable, ERC20Permit, ERC20Votes {
             votesFor: 0,
             votesAgainst: 0
         });
+        emit ProposalCreated(newProposalId, description);
         return newProposalId;
     }
 
