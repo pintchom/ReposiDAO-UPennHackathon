@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import main
 import balances
 import minting
+from tokenomics import get_supply
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -72,3 +73,8 @@ def get_history():
 #     minting.purchase(sender_address, signature, message, send_qty)
 
 #     return jsonify({"message": "success"})
+
+@app.route('/fetch_supply', methods = ['GET'])
+def fetch_supply():
+    supply = get_supply()
+    return jsonify(supply)
