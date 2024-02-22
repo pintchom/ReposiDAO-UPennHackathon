@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchBalances } from "/Users/maxpintchouk/Code/ReposaDAO/ReposadaoUPennHackathon/Frontend/src/utils/balances_stuff.js";
+import { fetchBalances } from "../utils/balances_stuff.js";
 
 const Leaderboard = () => {
   const [balances, setBalances] = useState([]);

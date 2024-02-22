@@ -3,14 +3,14 @@ import axios from "axios";
 import { ethers } from "ethers";
 
 //Components:
-import EmailBox from "./Components/EmailBox";
+import EmailBox from "./Components/EmailBox/EmailBox";
 import WalletConnector from "./Components/Wallet Connector/WalletConnector";
 import TokenomicInfo from "./Components/Tokenomic Info/TokenomicInfo";
 import Leaderboard from "./Components/Leaderboard/Leaderboard";
 import OutgoingTokens from "./Components/Outgoing Tokens/OutgoingTokens"; // Adjust the import path as necessary
 
 //Functions:
-import { exchangeTokensForGoods } from "./utils/blockchainstuff";
+import { exchangeTokensForGoods } from "./Components/utils/blockchainstuff";
 // import { fetchBalances, fetchCommitHistory } from "./utils/balances_stuff";
 
 function App() {
@@ -90,15 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <header
-        className="App-header"
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          padding: "1rem",
-        }}
-      >
+      <header className="App-header">
         <WalletConnector
           onSubmit={handleWalletSubmit}
           style={{

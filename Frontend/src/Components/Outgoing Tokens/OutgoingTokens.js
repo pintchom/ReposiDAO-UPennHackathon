@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchCommitHistory } from "/Users/maxpintchouk/Code/ReposaDAO/ReposadaoUPennHackathon/Frontend/src/utils/balances_stuff.js";
+import { fetchCommitHistory } from "../utils/balances_stuff.js";
 
 const OutgoingTokens = () => {
   const [commitHistory, setCommitHistory] = useState([]);

@@ -1,0 +1,11 @@
+.leaderboard-container {
+    border: 2px solid #333; /* Example border style */
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.balance-item {
+    border: 1px solid #999; /* Example border style */
+    padding: 5px;
+    margin-bottom: 10px;
+}
