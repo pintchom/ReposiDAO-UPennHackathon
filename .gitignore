@@ -197,3 +197,5 @@ packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
 .DS_Store
+__pycache__/app.cpython-310.pyc
+__pycache__/balances.cpython-310.pyc
