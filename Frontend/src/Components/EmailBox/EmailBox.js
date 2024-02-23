@@ -2,19 +2,48 @@ import React, { useState } from "react";
 import "./EmailBox.css";
 
 // Accept a prop named `onSubmit` which is a function passed from the parent component
-const EmailBox = ({ onSubmit }) => {
+const EmailBox = ({ onSubmit, public_key }) => {
   const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Call the onSubmit prop function, passing the email value to the parent component
-    onSubmit(email); // This line is changed to use the onSubmit prop
-    console.log("Email submitted:", email);
-    setEmail(""); // Optionally reset the email state here if needed
+
+    // Define the payload
+    const payload = {
+      email: email,
+      public_key: public_key, // Use the publicKey passed via props
+    };
+
+    // Make the POST request to the Flask endpoint
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/connect_wallet_login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        console.log("Server response:", jsonResponse);
+        // Call the onSubmit prop function, if additional actions are needed
+        onSubmit(email);
+        setEmail(""); // Reset the email state if needed
+      } else {
+        // Handle server errors (e.g., 4xx or 5xx error codes)
+        console.error("Server error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error making POST request:", error);
+    }
   };
 
   return (

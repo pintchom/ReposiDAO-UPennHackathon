@@ -58,6 +58,7 @@ function App() {
 
   const handleWalletSubmit = (walletData) => {
     setWalletData(walletData);
+    console.log(walletData);
   };
 
   const buyGoods = () => {
@@ -334,7 +335,7 @@ function App() {
             <WalletConnector onSubmit={handleWalletSubmit} />
           </div>
           <div style={styles.emailComponent}>
-            <EmailBox onSubmit={handleEmailSubmit} />
+            <EmailBox onSubmit={handleEmailSubmit} public_key={walletData} />
           </div>
           <div style={styles.leaderboardComponent}>
             <Leaderboard />
