@@ -1,0 +1,31 @@
+/* SendProposal.css */
+.send-proposal-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc; /* Adjust color as needed */
+    border-radius: 10px;
+    background-color: #f0f0f0; /* Light background, adjust as needed */
+}
+
+.send-proposal-input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.send-proposal-button {
+    padding: 10px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send-proposal-button.loading {
+    background-color: grey; /* Loading state color */
+    cursor: not-allowed;
+}

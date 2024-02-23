@@ -38,7 +38,7 @@ const Leaderboard = () => {
       {balances.length > 0 ? (
         balances.map((balance, index) => (
           <div key={index} className="balance-item">
-            <p>Wallet: {balance.wallet}</p>
+            <p>Email: {balance.wallet}</p>
             <p>Balance: {balance.amount}</p>
           </div>
         ))

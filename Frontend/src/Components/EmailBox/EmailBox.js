@@ -21,13 +21,12 @@ const EmailBox = ({ onSubmit }) => {
     <div className="EmailBox">
       {" "}
       {/* Use the class name to style the container */}
-      <h2>Enter Your Email:</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
           value={email}
           onChange={handleChange}
-          placeholder="Your email address"
+          placeholder="Enter email to link to wallet."
           required
         />
         <button type="submit">Submit</button>

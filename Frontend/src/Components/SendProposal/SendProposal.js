@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import "./SendProposal.css";
 
 // Add your contract's ABI and address here
 const contractAddress = "0x0EcEcD9B2F47b79fa993c3911fB9cA7c9c5e328B";
@@ -8,6 +9,7 @@ const contractABI =
 
 const SendProposal = () => {
   const [description, setDescription] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Function to handle proposal submission
   const submitProposal = async () => {
@@ -34,21 +36,33 @@ const SendProposal = () => {
 
       alert("Proposal submitted successfully!");
       setDescription(""); // Clear the input after submission
+      setIsLoading(false); // End loading
+      setDescription(""); // Clear the input
+      alert("Proposal submitted successfully!");
     } catch (error) {
       console.error("Error submitting proposal:", error);
       alert("Failed to submit proposal.");
+      setIsLoading(false); // End loading on error
     }
   };
 
   return (
-    <div>
+    <div className="send-proposal-container">
       <input
+        className="send-proposal-input"
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Enter your proposal"
+        disabled={isLoading} // Disable input during loading
       />
-      <button onClick={submitProposal}>Submit Proposal</button>
+      <button
+        className={`send-proposal-button ${isLoading ? "loading" : ""}`}
+        onClick={submitProposal}
+        disabled={isLoading} // Disable button during loading
+      >
+        {isLoading ? "Loading..." : "Submit Proposal"}
+      </button>
     </div>
   );
 };
