@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchBalances } from "../utils/balances_stuff.js";
+import "./Leaderboard.css";
 
 const Leaderboard = () => {
   const [balances, setBalances] = useState([]);
@@ -32,11 +33,11 @@ const Leaderboard = () => {
   }
 
   return (
-    <div>
+    <div className="Leaderboard-container">
       <h2>Leaderboard</h2>
       {balances.length > 0 ? (
         balances.map((balance, index) => (
-          <div key={index}>
+          <div key={index} className="balance-item">
             <p>Wallet: {balance.wallet}</p>
             <p>Balance: {balance.amount}</p>
           </div>

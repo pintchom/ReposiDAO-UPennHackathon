@@ -1,0 +1,23 @@
+/* OutgoingTokens.css */
+
+.OutgoingTokens-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    color: white; /* Ensuring text color is white for visibility against the dark background */
+}
+
+.token-entry {
+    border: 1px solid white; /* White border for separation */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 100%; /* Adjust the width as needed */
+    box-sizing: border-box;
+    background-color: transparent; /* No background color for the entry, or you can remove this line */
+}
+
+.token-entry p {
+    margin: 5px 0;
+}

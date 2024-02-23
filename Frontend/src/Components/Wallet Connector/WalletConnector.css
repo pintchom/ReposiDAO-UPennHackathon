@@ -1,17 +1,22 @@
-.connect-wallet-button {
-    position: absolute; /* Position absolute so it stays in place relative to the document */
-    top: 10px; /* Distance from the top */
-    right: 10px; /* Distance from the right */
-    z-index: 9999; /* Ensure it appears above other content */
-    background-color: #007bff; /* Button background color */
-    color: #fff; /* Text color */
-    padding: 10px 20px; /* Padding for the button */
-    border: 2px solid black; /* Border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer;
+/* WalletConnector.css */
+
+.WalletConnector {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Take full height of the parent container */
 }
 
-/* Optionally, you can add hover effects */
+.connect-wallet-button {
+    background-color: royalblue; /* Set the button color to royal blue */
+    color: white; /* Set text color to white for better contrast */
+    padding: 10px 20px; /* Add some padding around the text */
+    border: none; /* Remove the default border */
+    border-radius: 5px; /* Optionally, add rounded corners */
+    cursor: pointer; /* Change mouse cursor on hover */
+    font-size: 16px; /* Increase font size */
+}
+
 .connect-wallet-button:hover {
-    background-color: #0056b3; /* Darker shade of the button color on hover */
+    background-color: darkblue; /* Darken the button a bit when hovered */
 }

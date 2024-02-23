@@ -1,0 +1,37 @@
+/* EmailBox.css */
+
+.EmailBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center everything vertically */
+}
+
+.EmailBox form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form elements */
+    width: 100%;
+}
+
+.EmailBox input {
+    width: 90%; /* Make the input box take up most of the form width */
+    padding: 10px; /* Add some padding inside the input box */
+    margin-bottom: 10px; /* Add some space below the input box */
+    border: 1px solid #ccc; /* Give the input box a border */
+    border-radius: 5px; /* Round the corners of the input box */
+}
+
+.EmailBox button {
+    width: 94%; /* Match the effective width of the input box, considering padding */
+    padding: 10px; /* Make the button taller to match the input box's size */
+    background-color: darkblue; /* Set the button color to dark blue */
+    color: white; /* Set the text color to white */
+    border: none; /* Remove the default border */
+    border-radius: 5px; /* Round the corners of the button */
+    cursor: pointer; /* Change the cursor to indicate it's clickable */
+    font-size: 16px; /* Increase the font size */
+}
+
+.EmailBox button:hover {
+    background-color: navy; /* Change the button color on hover for feedback */
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Vote from "./Voting.js"; // Ensure this is the correct path
+import "./GetProposals.css";
 
 const GetProposals = ({ userAddress }) => {
   const [proposals, setProposals] = useState([]);
@@ -25,9 +26,9 @@ const GetProposals = ({ userAddress }) => {
   }, []);
 
   return (
-    <div>
+    <div className="GetProposals-container">
       {proposals.map((proposal) => (
-        <div key={proposal.id} style={{ marginBottom: "20px" }}>
+        <div key={proposal.id} className="proposal">
           <p>
             <strong>Description:</strong> {proposal.description}
           </p>

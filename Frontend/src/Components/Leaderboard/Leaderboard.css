@@ -1,11 +1,24 @@
-.leaderboard-container {
-    border: 2px solid #333; /* Example border style */
-    padding: 10px;
-    margin-bottom: 20px;
+/* Leaderboard.css */
+
+.Leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
 }
 
 .balance-item {
-    border: 1px solid #999; /* Example border style */
-    padding: 5px;
-    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    width: calc(
+        100% - 40px
+    ); /* Adjust width to prevent text from falling off */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    overflow-wrap: break-word; /* Ensure long text wraps and doesn't overflow */
+}
+
+.balance-item p {
+    margin: 5px 0;
 }

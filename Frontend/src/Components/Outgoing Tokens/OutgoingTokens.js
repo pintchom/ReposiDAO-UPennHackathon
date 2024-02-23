@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchCommitHistory } from "../utils/balances_stuff.js";
+import "./OutgoingTokens.css";
 
 const OutgoingTokens = () => {
   const [commitHistory, setCommitHistory] = useState([]);
@@ -21,11 +22,11 @@ const OutgoingTokens = () => {
   }, []);
 
   return (
-    <div>
+    <div className="OutgoingTokens-container">
       <h2>Outgoing Tokens</h2>
       {commitHistory.length > 0 ? (
         commitHistory.map((entry, index) => (
-          <div key={index}>
+          <div key={index} className="token-entry">
             <p>Timestamp: {entry.timestamp}</p>
             <p>Commit ID: {entry.commit_id}</p>
             <p>Email: {entry.email}</p>

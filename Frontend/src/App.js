@@ -91,116 +91,225 @@ function App() {
   //   loadBalances();
   //   loadCommitHistory();
   // }, []);
+  const styles = {
+    appContainer: {
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "#081723",
+      color: "white",
+      height: "100vh",
+      fontFamily: "Arial, sans-serif",
+      padding: "20px",
+      boxSizing: "border-box",
+      justifyContent: "space-between", // Push the header to the top and main content to the bottom
+    },
+    header: {
+      marginBottom: "20px",
+      textAlign: "center",
+    },
+    mainContent: {
+      display: "flex",
+      flexDirection: "row", // Set to row to align items horizontally
+      height: "calc(100% - 60px)", // Adjusted for header height and padding
+      alignItems: "stretch", // Stretch children vertically
+    },
+    proposalsComponent: {
+      width: "300px",
+      border: "1px solid white",
+      padding: "10px",
+      borderRadius: "35px",
+      marginRight: "20px",
+      flexGrow: 1,
+      height: "calc(100% - 20px)", // Adjusted to be 20px from the bottom
+    },
+    outgoingTokenComponent: {
+      flexGrow: 2,
+      border: "1px solid white",
+      padding: "10px",
+      borderRadius: "35px",
+      marginRight: "20px",
+      height: "calc(100% - 180px)", // Make this component 160px shorter from the top
+      marginTop: "160px", // Push down from the top by 160px
+      overflowY: "auto", // Enable vertical scrolling
+      scrollbarWidth: "none", // For Firefox
+      msOverflowStyle: "none", // For IE and Edge
+      // Note: Webkit browsers require CSS to hide the scrollbar (see below)
+    },
+    leaderboardComponent: {
+      width: "300px",
+      border: "1px solid white",
+      padding: "10px",
+      borderRadius: "35px",
+      flexGrow: 1,
+      height: "calc(100% - 80px)", // Adjust this as necessary
+      overflowY: "auto", // Enable vertical scrolling within the component
+      scrollbarWidth: "none" /* For Firefox */,
+      msOverflowStyle: "none" /* For Internet Explorer and Edge */,
+      // For Webkit (Chrome, Safari, Opera) browsers, additional CSS is needed
+    },
+
+    walletComponent: {
+      width: "300px",
+      border: "1px solid white",
+      padding: "10px",
+      borderRadius: "35px",
+      marginBottom: "10px", // 10px space below the component
+      // Set the height to distribute space, assuming the Email component has a similar size
+      height: "calc((100% - 160px - 20px) / 3)", // Subtract 160px for the Leaderboard and 20px for the margin
+    },
+
+    emailComponent: {
+      width: "300px",
+      border: "1px solid white",
+      padding: "10px",
+      borderRadius: "35px",
+      marginBottom: "10px", // 10px space below the component
+      // Set the height similar to the wallet component
+      height: "calc((100% - 160px - 20px) / 3)",
+    },
+
+    rightColumn: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      alignItems: "flex-end", // Align the children to the right
+      height: "100%",
+    },
+  };
 
   return (
-    <div className="App">
-      <header
-        className="App-header"
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          padding: "1rem",
-        }}
-      >
-        <div>
-          <button
-            className="refresh-button"
-            onClick={refreshGitLog}
-            style={{
-              padding: "0.5rem 1rem",
-              cursor: "pointer",
-            }}
-          >
-            Refresh
-          </button>
+    // <div className="App">
+    //   <header
+    //     className="App-header"
+    //     style={{
+    //       display: "flex",
+    //       flexDirection: "row",
+    //       justifyContent: "space-between",
+    //       alignItems: "center",
+    //       width: "100%",
+    //       padding: "1rem",
+    //     }}
+    //   >
+    //     <div>
+    //       <button
+    //         className="refresh-button"
+    //         onClick={refreshGitLog}
+    //         style={{
+    //           padding: "0.5rem 1rem",
+    //           cursor: "pointer",
+    //         }}
+    //       >
+    //         Refresh
+    //       </button>
+    //     </div>
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         alignItems: "flex-end",
+    //       }}
+    //     >
+    //       <WalletConnector onSubmit={handleWalletSubmit} />
+    //       <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
+    //         <EmailBox onSubmit={handleEmailSubmit} />
+    //       </div>
+    //     </div>
+    //   </header>
+    //   <main
+    //     style={{
+    //       display: "flex",
+    //       flexDirection: "row",
+    //       justifyContent: "center",
+    //       alignItems: "flex-start",
+    //       height: "100vh",
+    //       padding: "1rem",
+    //     }}
+    //   >
+    //     <aside
+    //       className="leaderboard-feed"
+    //       style={{
+    //         flex: 1,
+    //         marginRight: "1rem",
+    //         border: "2px solid black",
+    //         borderRadius: "10px",
+    //         padding: "20px", // Increased padding here
+    //       }}
+    //     >
+    //       <Leaderboard />
+    //     </aside>
+    //     <section
+    //       className="main-content"
+    //       style={{
+    //         flex: 2,
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         alignItems: "center",
+    //         margin: "0 1rem",
+    //       }}
+    //     >
+    //       <h1>ReposiDAO</h1>
+    //       <div className="tokenomic-info">
+    //         <TokenomicInfo />
+    //       </div>
+    //       <div
+    //         className="commit-history-feed"
+    //         style={{
+    //           marginTop: "1rem",
+    //           border: "2px solid black",
+    //           borderRadius: "10px",
+    //           padding: "20px", // Increased padding here
+    //         }}
+    //       >
+    //         <OutgoingTokens />
+    //       </div>
+    //       <div
+    //         className="send-proposal-section"
+    //         style={{
+    //           marginTop: "2rem", // Adjust spacing as needed
+    //         }}
+    //       >
+    //         <SendProposal />
+    //       </div>
+    //     </section>
+    //     <aside
+    //       style={{
+    //         flex: 1,
+    //         marginLeft: "1rem",
+    //         border: "2px solid black",
+    //         borderRadius: "10px",
+    //         padding: "20px",
+    //         display: "flex",
+    //         flexDirection: "column",
+    //         alignItems: "flex-start",
+    //       }}
+    //     >
+    //       <GetProposals />
+    //     </aside>
+    //   </main>
+    // </div>
+    //
+    <div style={styles.appContainer}>
+      <div style={styles.header}></div>
+      <div style={styles.mainContent}>
+        <div style={styles.proposalsComponent}>
+          <GetProposals userAddress={walletData} />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
-          }}
-        >
-          <WalletConnector onSubmit={handleWalletSubmit} />
-          <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
+        <div style={styles.outgoingTokenComponent}>
+          <OutgoingTokens />
+        </div>
+        <div style={styles.rightColumn}>
+          <div style={styles.walletComponent}>
+            <WalletConnector onSubmit={handleWalletSubmit} />
+          </div>
+          <div style={styles.emailComponent}>
             <EmailBox onSubmit={handleEmailSubmit} />
           </div>
+          {/* Replace the placeholder div with the Leaderboard component */}
+          <div style={styles.leaderboardComponent}>
+            <Leaderboard />
+          </div>
         </div>
-      </header>
-      <main
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          height: "100vh",
-          padding: "1rem",
-        }}
-      >
-        <aside
-          className="leaderboard-feed"
-          style={{
-            flex: 1,
-            marginRight: "1rem",
-            border: "2px solid black",
-            borderRadius: "10px",
-            padding: "20px", // Increased padding here
-          }}
-        >
-          <Leaderboard />
-        </aside>
-        <section
-          className="main-content"
-          style={{
-            flex: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            margin: "0 1rem",
-          }}
-        >
-          <h1>ReposiDAO</h1>
-          <div className="tokenomic-info">
-            <TokenomicInfo />
-          </div>
-          <div
-            className="commit-history-feed"
-            style={{
-              marginTop: "1rem",
-              border: "2px solid black",
-              borderRadius: "10px",
-              padding: "20px", // Increased padding here
-            }}
-          >
-            <OutgoingTokens />
-          </div>
-          <div
-            className="send-proposal-section"
-            style={{
-              marginTop: "2rem", // Adjust spacing as needed
-            }}
-          >
-            <SendProposal />
-          </div>
-        </section>
-        <aside
-          style={{
-            flex: 1,
-            marginLeft: "1rem",
-            border: "2px solid black",
-            borderRadius: "10px",
-            padding: "20px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <GetProposals />
-        </aside>
-      </main>
+      </div>
     </div>
   );
 }

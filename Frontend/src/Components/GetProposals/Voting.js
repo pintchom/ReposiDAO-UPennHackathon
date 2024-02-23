@@ -1,5 +1,6 @@
 import React from "react";
 import { ethers } from "ethers";
+import "./GetProposals.css";
 
 const tokenContractAddress = "0x0EcEcD9B2F47b79fa993c3911fB9cA7c9c5e328B";
 const tokenABI =
@@ -33,10 +34,18 @@ const Vote = ({ proposalId, userAddress }) => {
 
   return (
     <div>
-      <button onClick={() => vote(true)}>Upvote</button>
-      <button onClick={() => vote(false)}>Downvote</button>
+      <button className="voting-button" onClick={() => vote(true)}>
+        Upvote
+      </button>
+      <button className="voting-button" onClick={() => vote(false)}>
+        Downvote
+      </button>
     </div>
   );
 };
 
 export default Vote;
+
+// <button className="connect-wallet-button" onClick={requestAccount}>
+//   {isWalletConnected ? "Wallet Connected" : "Connect MetaMask"}
+// </button>

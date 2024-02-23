@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./EmailBox.css";
 
 // Accept a prop named `onSubmit` which is a function passed from the parent component
 const EmailBox = ({ onSubmit }) => {
@@ -18,9 +17,7 @@ const EmailBox = ({ onSubmit }) => {
   };
 
   return (
-    <div className="EmailBox">
-      {" "}
-      {/* Use the class name to style the container */}
+    <div>
       <h2>Enter Your Email:</h2>
       <form onSubmit={handleSubmit}>
         <input
