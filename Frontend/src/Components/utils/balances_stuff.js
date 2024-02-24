@@ -1,5 +1,5 @@
 export async function fetchCommitHistory() {
-  const apiUrl = "http://127.0.0.1:5000/get_history";
+  const apiUrl = "http://18.235.255.142/get_history";
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
@@ -13,7 +13,7 @@ export async function fetchCommitHistory() {
 }
 
 export async function fetchBalances() {
-  const apiUrl = "http://127.0.0.1:5000/get_balances";
+  const apiUrl = "http://18.235.255.142/get_balances";
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {

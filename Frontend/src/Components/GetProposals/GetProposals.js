@@ -10,7 +10,7 @@ const GetProposals = ({ userAddress }) => {
     const fetchProposals = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:5000/fetch_all_proposals",
+          "http://18.235.255.142/fetch_all_proposals",
         );
         if (response.status === 200) {
           setProposals(response.data);
