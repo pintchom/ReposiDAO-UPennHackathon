@@ -12,6 +12,7 @@ import OutgoingTokens from "./Components/Outgoing Tokens/OutgoingTokens"; // Adj
 import SendProposal from "./Components/SendProposal/SendProposal.js";
 import GetProposals from "./Components/GetProposals/GetProposals.js";
 import Refresh from "./Components/Refresh/Refresh.js";
+import UpdateGitLog from "./Components/Chainlink Functions/UpdateGitLog.js";
 //Functions:
 import { exchangeTokensForGoods } from "./Components/utils/blockchainstuff";
 // import { fetchBalances, fetchCommitHistory } from "./utils/balances_stuff";
@@ -300,7 +301,6 @@ function App() {
           <GetProposals userAddress={walletData} />
         </div>
 
-        {/* Flex container for SendProposal and OutgoingTokens */}
         <div
           style={{
             flexGrow: 2,
@@ -317,15 +317,15 @@ function App() {
             />
           </div>
 
-          {/* Ensure SendProposal matches the width of OutgoingTokens */}
           <div style={styles.sendProposalComponent}>
-            {" "}
-            {/* This ensures the child components fill the container */}
-            <SendProposal />{" "}
-            {/* This component will now match the width of its sibling */}
+            <SendProposal />
           </div>
 
           <div style={styles.outgoingTokenComponent}>
+            {/* UpdateGitLog Button added here */}
+            <div style={{ marginBottom: "20px" }}>
+              <UpdateGitLog />
+            </div>
             <OutgoingTokens />
           </div>
         </div>
