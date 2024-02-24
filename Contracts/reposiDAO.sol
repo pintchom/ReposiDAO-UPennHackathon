@@ -7,8 +7,12 @@ import "@openzeppelin/contracts@5.0.1/access/Ownable.sol";
 import "@openzeppelin/contracts@5.0.1/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts@5.0.1/token/ERC20/extensions/ERC20Votes.sol";
 
+import "./testChainlink.sol";
+
 /// @custom:security-contact pintchom@bc.edu
 contract ReposiDAO is ERC20, ERC20Burnable, Ownable, ERC20Permit, ERC20Votes {
+
+    IChainlinkFunctions public testChainlink;
 
     struct Proposal {
         string description;
@@ -24,12 +28,13 @@ contract ReposiDAO is ERC20, ERC20Burnable, Ownable, ERC20Permit, ERC20Votes {
     // Track if a token holder has voted on a specific proposal
     mapping(uint256 => mapping(address => bool)) public hasVoted;
 
-    constructor(address initialOwner)
+    constructor(address initialOwner, address _chainlinkFunctionsAddress)
         ERC20("ReposiDAO", "REPO")
         Ownable(initialOwner)
         ERC20Permit("ReposiDAO")
     {
         proposalCount = 0;
+        testChainlink = IChainlinkFunctions(_chainlinkFunctionsAddress); // Initialize the reference to the Chainlink Functions contract
     }
 
     event ProposalCreated(uint256 id, string description);

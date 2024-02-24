@@ -21,7 +21,7 @@ const EmailBox = ({ onSubmit, public_key }) => {
     // Make the POST request to the Flask endpoint
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/connect_wallet_login",
+        "http://18.235.255.142/connect_wallet_login",
         {
           method: "POST",
           headers: {

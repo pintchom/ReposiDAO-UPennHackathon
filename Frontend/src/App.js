@@ -41,7 +41,7 @@ function App() {
       };
       console.log(JSON.stringify(formData));
       const response = await axios.post(
-        "http://127.0.0.1:5000/connect_wallet_login",
+        "http://18.235.255.142/connect_wallet_login",
         formData,
       );
       console.log(response.data);
