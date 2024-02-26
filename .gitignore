@@ -200,3 +200,4 @@ packages/react-devtools-timeline/dist
 __pycache__/app.cpython-310.pyc
 __pycache__/balances.cpython-310.pyc
 reposadao-b831e-firebase-adminsdk-q252c-10034dc1e1.json
+contract_info.py
