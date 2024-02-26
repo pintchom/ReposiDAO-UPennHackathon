@@ -8,7 +8,7 @@ def mint(recipient_public_key, mint_qty):
     contract_address = web3.to_checksum_address(ci.contract_address)
     contract_abi = json.loads(ci.contract_abi)
     public_key = web3.to_checksum_address("0x76a89dBd709835b9D1A3D60eE31f9e6C54CC8ac6")
-    private_key = "c384badf1fdd45baa289bf2b1245347df5d36681afa109885a91f966432566dc"
+    private_key = ci.private_key
     recipient_public_key = web3.to_checksum_address(recipient_public_key)
     contract = web3.eth.contract(address=contract_address, abi=contract_abi)
     mint_amount = web3.to_wei(mint_qty, 'ether')
